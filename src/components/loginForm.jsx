@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
 class LoginForm extends Component {
+  username = React.createRef();
+
   handleSubmit = e => {
     e.preventDefault();
-
-    console.log("Submitted");
+    const username = this.username.current.value;
+    console.log("Submitted-", username);
   };
 
   render() {
@@ -20,6 +22,7 @@ class LoginForm extends Component {
               className="form-control"
               id="username"
               placeholder="User Name"
+              ref={this.username}
             />
           </div>
           <div className="form-group">
