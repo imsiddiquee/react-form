@@ -1,15 +1,17 @@
 import React, { Component } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 //import logo from "./logo.svg";
 import Movies from "./components/movies";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.css";
-import "font-awesome/css/font-awesome.css";
 import NavBar from "./components/navBar";
-import { Switch, Route, Redirect } from "react-router-dom";
+
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
 import NotFound from "./components/notFound";
 import MovieForm from "./components/movieForm";
+import LoginForm from "./components/loginForm";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "font-awesome/css/font-awesome.css";
 
 class App extends Component {
   render() {
@@ -18,6 +20,7 @@ class App extends Component {
         <NavBar />
         <div className="container">
           <Switch>
+            <Route path="/login" component={LoginForm} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
             <Route path="/movies" component={Movies} />
