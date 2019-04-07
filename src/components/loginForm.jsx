@@ -3,10 +3,29 @@ import Input from "./common/input";
 
 class LoginForm extends Component {
   state = {
-    account: { username: "", password: "" }
+    account: { username: "", password: "" },
+    errors: {}
+  };
+
+  validate = () => {
+    const errors = {};
+    const { account } = this.state;
+
+    if (account.username.trim() === "")
+      errors.username = "User name is required.";
+
+    if (account.password.trim() === "")
+      errors.password = "Password is required.";
+
+    return Object.keys(errors).length === 0 ? null : errors;
   };
   handleSubmit = e => {
     e.preventDefault();
+
+    const errors = this.validate();
+    this.setState({ errors: errors });
+    if (errors) return;
+
     console.log("Submitted-");
   };
   handleChange = ({ currentTarget: input }) => {
