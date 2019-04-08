@@ -18,6 +18,7 @@ class Movies extends Component {
     currentPage: 1,
     pageSize: 4,
     selectedGenre: null,
+    searchQuery: "",
     sortColumn: { path: "title", order: "asc" }
   };
 
@@ -56,18 +57,32 @@ class Movies extends Component {
       pageSize,
       movies: allMovies,
       selectedGenre,
+      searchQuery,
       sortColumn
     } = this.state;
 
-    const filtered =
-      selectedGenre && selectedGenre._id
-        ? allMovies.filter(m => m.genre._id === selectedGenre._id)
-        : allMovies;
+    let filtered = allMovies;
+
+    if (searchQuery) {
+      filtered = allMovies.filter(m =>
+        m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+      );
+    } else if (selectedGenre && selectedGenre._id)
+      filtered = allMovies.filter(m => m.genre._id === selectedGenre._id);
+
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
     const movies = paginate(sorted, currentPage, pageSize);
 
     return { totalCount: filtered.length, data: movies };
+  };
+
+  handleSearchOnChange = e => {
+    this.setState({
+      searchQuery: e.currentTarget.value,
+      selectedGenre: null,
+      currentPage: 1
+    });
   };
 
   render() {
@@ -99,6 +114,16 @@ class Movies extends Component {
               New Movies
             </Link>
             <p>Showing {totalCount} movies in database</p>
+
+            <div className="input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search"
+                onChange={this.handleSearchOnChange}
+              />
+            </div>
+
             <MovieTable
               movies={data}
               sortColumn={sortColumn}
