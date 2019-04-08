@@ -10,6 +10,7 @@ import { getGenres } from "./../services/fakeGenreService";
 import ListGroup from "./common/listGroup";
 import MovieTable from "./moviesTable";
 import _ from "lodash";
+import SearchBox from "./common/searchbox";
 
 class Movies extends Component {
   state = {
@@ -77,9 +78,9 @@ class Movies extends Component {
     return { totalCount: filtered.length, data: movies };
   };
 
-  handleSearchOnChange = e => {
+  handleTextChange = query => {
     this.setState({
-      searchQuery: e.currentTarget.value,
+      searchQuery: query,
       selectedGenre: null,
       currentPage: 1
     });
@@ -91,6 +92,7 @@ class Movies extends Component {
       pageSize,
       genres,
       selectedGenre,
+      searchQuery,
       sortColumn
     } = this.state;
 
@@ -115,14 +117,10 @@ class Movies extends Component {
             </Link>
             <p>Showing {totalCount} movies in database</p>
 
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search"
-                onChange={this.handleSearchOnChange}
-              />
-            </div>
+            <SearchBox
+              value={searchQuery}
+              onTextChange={this.handleTextChange}
+            />
 
             <MovieTable
               movies={data}
