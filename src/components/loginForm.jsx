@@ -23,7 +23,7 @@ class LoginForm extends Component {
     e.preventDefault();
 
     const errors = this.validate();
-    this.setState({ errors: errors });
+    this.setState({ errors: errors || {} });
     if (errors) return;
 
     console.log("Submitted-");
