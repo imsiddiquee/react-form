@@ -25,6 +25,7 @@ class App extends Component {
             <Route path="/register" component={RegisterForm} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
+            {/* <Route path="/movies/new" component={MovieForm} /> */}
             <Route path="/movies" component={Movies} />
             <Route path="/movieform/:id" component={MovieForm} />
             <Route path="/not-found" component={NotFound} />
