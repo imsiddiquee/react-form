@@ -35,7 +35,7 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { account } = this.state;
+    const { account, errors } = this.state;
     return (
       <div>
         <h1>Login</h1>
@@ -46,6 +46,7 @@ class LoginForm extends Component {
             label="User Name"
             value={account.username}
             type="text"
+            error={errors.username}
             onChange={this.handleChange}
           />
           <Input
@@ -53,6 +54,7 @@ class LoginForm extends Component {
             label="Password"
             value={account.password}
             type="password"
+            error={errors.password}
             onChange={this.handleChange}
           />
 
