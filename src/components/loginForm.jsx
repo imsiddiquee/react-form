@@ -17,18 +17,13 @@ class LoginForm extends Component {
     const result = Joi.validate(this.state.account, this.schema, {
       abortEarly: false
     });
-    console.log(result);
+    
+    if (!result.error) return null;
 
     const errors = {};
-    const { account } = this.state;
+    for (let item of result.error.details) errors[item.path[0]] = item.message;
 
-    if (account.username.trim() === "")
-      errors.username = "User name is required.";
-
-    if (account.password.trim() === "")
-      errors.password = "Password is required.";
-
-    return Object.keys(errors).length === 0 ? null : errors;
+    return errors;
   };
   handleSubmit = e => {
     e.preventDefault();
