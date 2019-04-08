@@ -65,25 +65,7 @@ class MovieForm extends Form {
 
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("title", "Movie Title")}
-
-          <div className="form-group clikable">
-            <label htmlFor="genreId">Genre</label>
-            <select
-              name="genreId"
-              className="custom-select"
-              id="genreId"
-              onChange={this.handleChange}
-              value={this.state.data.genreId}
-            >
-              <option value="" />
-              {this.state.genres.map(genre => (
-                <option key={genre._id} value={genre._id}>
-                  {genre.name}
-                </option>
-              ))}
-            </select>
-            {/* {error && <div className="alert alert-danger">{error}</div>} */}
-          </div>
+          {this.renderSelect("genreId", "Genre", this.state.genres)}
           {this.renderInput("numberInStock", "Number In Stock", "number")}
           {this.renderInput("dailyRentalRate", "Daily Rental Rate", "number")}
 
