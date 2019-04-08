@@ -28,10 +28,24 @@ class LoginForm extends Component {
 
     console.log("Submitted-");
   };
+  validateProperty = input => {
+    if (input.name === "username") {
+      if (input.value.trim() === "") return "User name is required.";
+    }
+    if (input.name === "password") {
+      if (input.value.trim() === "") return "Password is required.";
+    }
+  };
   handleChange = ({ currentTarget: input }) => {
+    const errors = { ...this.state.errors };
+    const errorMessage = this.validateProperty(input);
+    if (errorMessage) errors[input.name] = errorMessage;
+    else delete errors[input.name];
+
     const account = { ...this.state.account };
     account[input.name] = input.value;
-    this.setState({ account: account });
+
+    this.setState({ account: account, errors: errors });
   };
 
   render() {
