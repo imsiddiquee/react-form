@@ -39,12 +39,14 @@ class LoginForm extends Component {
     console.log("Submitted-");
   };
   validateProperty = ({ name, value }) => {
-    if (name === "username") {
-      if (value.trim() === "") return "User name is required.";
-    }
-    if (name === "password") {
-      if (value.trim() === "") return "Password is required.";
-    }
+    const obj = { [name]: value };
+
+    // if (name === "username") {
+    //   if (value.trim() === "") return "User name is required.";
+    // }
+    // if (name === "password") {
+    //   if (value.trim() === "") return "Password is required.";
+    // }
   };
   handleChange = ({ currentTarget: input }) => {
     const errors = { ...this.state.errors };
