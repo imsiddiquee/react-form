@@ -20,7 +20,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <ReaToastContainer />
+        <ToastContainer />
         <NavBar />
         <div className="container">
           <Switch>
